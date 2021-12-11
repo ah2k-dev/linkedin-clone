@@ -1,9 +1,17 @@
 import { auth, provider, storage } from "../firebase";
 import db from "../firebase";
-import { SET_USER } from "./actionTypes";
+import { SET_USER, SET_LOADING, GET_POSTS } from "./actionTypes";
 export const setUser = (payload) => ({
   type: SET_USER,
   user: payload,
+});
+export const setLoading = (status) => ({
+  type: SET_LOADING,
+  status: status,
+});
+export const getPosts = (payload) => ({
+  type: GET_POSTS,
+  payload: payload,
 });
 export function signInApi() {
   return (dispatch) => {
@@ -39,6 +47,7 @@ export function signOutApi() {
 
 export function uploadPostApi(payload) {
   return (dispatch) => {
+    dispatch(setLoading(true));
     if (payload.image != "") {
       const upload = storage
         .ref(`images/${payload.image.name}`)
@@ -68,6 +77,7 @@ export function uploadPostApi(payload) {
             comments: 0,
             description: payload.description,
           });
+          dispatch(setLoading(false));
         }
       );
     } else if (payload.video) {
@@ -83,6 +93,19 @@ export function uploadPostApi(payload) {
         comments: 0,
         description: payload.description,
       });
+      dispatch(setLoading(false));
     }
+  };
+}
+export function getPostsApi() {
+  return (dispatch) => {
+    let payload;
+    db.collection("articles")
+      .orderBy("actor.date", "desc")
+      .onSnapshot((snapshot) => {
+        payload = snapshot.docs.map((doc) => doc.data());
+        // console.log(payload);
+        dispatch(getPosts(payload));
+      });
   };
 }
