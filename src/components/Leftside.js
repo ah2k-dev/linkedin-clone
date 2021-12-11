@@ -1,3 +1,4 @@
+import { connect } from "react-redux";
 import styled from "styled-components";
 
 const Leftside = (props) => {
@@ -8,7 +9,7 @@ const Leftside = (props) => {
           <CardBackground />
           <a>
             <Photo />
-            <Link>Welcome, there!</Link>
+            <Link>Welcome, {props.user.displayName}</Link>
           </a>
           <a>
             <AddPhotoText>Add a photo</AddPhotoText>
@@ -112,7 +113,7 @@ const AddPhotoText = styled.div`
   font-size: 12px;
   line-height: 1.33;
   font-weight: 400;
-  &:hover{
+  &:hover {
     cursor: pointer;
   }
 `;
@@ -174,7 +175,6 @@ const Item = styled.a`
   &:hover {
     background-color: rgba(0, 0, 0, 0.08);
     cursor: pointer;
-
   }
 `;
 
@@ -191,7 +191,6 @@ const CommunityCard = styled(ArtCard)`
     &:hover {
       color: #0a66c2;
       cursor: pointer;
-
     }
 
     span {
@@ -212,5 +211,9 @@ const CommunityCard = styled(ArtCard)`
     }
   }
 `;
-
-export default Leftside;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState,
+  };
+};
+export default connect(mapStateToProps)(Leftside);

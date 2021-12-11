@@ -81,5 +81,10 @@ const Layout = styled.div`
     padding: 0 5px;
   }
 `;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState,
+  }
+}
 
 export default Home;

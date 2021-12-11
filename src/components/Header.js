@@ -1,6 +1,14 @@
 import styled from "styled-components";
+import { connect } from "react-redux";
+import { signOutApi } from "../actions";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Header = (props) => {
+  // console.log(props.user);
+  const navigate = useNavigate();
+  if (!props.user.auth) {
+    navigate("/");
+  }
   return (
     <Container>
       <Content>
@@ -56,15 +64,15 @@ const Header = (props) => {
 
             <User>
               <a>
-                <img src="/images/user.svg" alt="" />
+                {/* {props.user? <img src={props.user.photoUrl} /> : <img src = '/images/user.svg'/>} */}
+                <img src={props.user.photoURL} />
                 <span>
-                    Me
-                    <img src="/images/down-icon.svg" alt="" />
+                  Me
+                  <img src="/images/down-icon.svg" alt="" />
                 </span>
-                
               </a>
 
-              <SignOut>
+              <SignOut onClick={() => props.signOut()}>
                 <a>Sign Out</a>
               </SignOut>
             </User>
@@ -95,7 +103,6 @@ const Container = styled.div`
   width: 100vw;
   z-index: 100;
   min-height: 40px;
-  
 `;
 
 const Content = styled.div`
@@ -136,10 +143,8 @@ const Search = styled.div`
       height: 34px;
       border-color: #dce6f1;
       vertical-align: text-top;
-     
     }
   }
-  
 `;
 
 const SearchIcon = styled.div`
@@ -238,8 +243,8 @@ const SignOut = styled.div`
   transition-duration: 167ms;
   text-align: center;
   display: none;
-  @media(max-width: 768px){
-      top: -45px;
+  @media (max-width: 768px) {
+    top: -45px;
   }
 `;
 
@@ -284,4 +289,15 @@ const Work = styled(User)`
   border-left: 1px solid rgba(0, 0, 0, 0.08);
 `;
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState,
+  };
+};
+const mapDispatchToProps = (dispatch) => ({
+  signOut: () => {
+    dispatch(signOutApi());
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
