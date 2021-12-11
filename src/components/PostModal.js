@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import firebase from "firebase/compat";
+import { uploadPostApi } from "../actions";
 // import ReactPlayer from "react-player"
 function PostModal(props) {
   const [editorText, setEditorText] = useState("");
@@ -21,6 +23,23 @@ function PostModal(props) {
     setshareImage("");
     setshareVideo("");
     setassetArea(area);
+  };
+  const postArticle = (e) => {
+    // console.log('post articlee working');
+    e.preventDefault();
+    if (e.target !== e.currentTarget) {
+      console.log("returns back");
+      return;
+    }
+    const payload = {
+      image: shareImage,
+      video: shareVideo,
+      user: props.user,
+      description: editorText,
+      timestamp: firebase.firestore.Timestamp.now(),
+    };
+    props.postArticle(payload);
+    reset(e);
   };
   const reset = (e) => {
     setshareImage("");
@@ -101,7 +120,10 @@ function PostModal(props) {
                   Comment
                 </AssetButton>
               </ShareComment>
-              <PostButton disabled={!editorText ? true : false}>
+              <PostButton
+                disabled={!editorText ? true : false}
+                onClick={(e) => postArticle(e)}
+              >
                 Post
               </PostButton>
             </SharedActions>
@@ -117,7 +139,9 @@ const mapSateToProps = (state) => {
     user: state.userState,
   };
 };
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  postArticle: (payload) => dispatch(uploadPostApi(payload)),
+});
 
 export default connect(mapSateToProps, mapDispatchToProps)(PostModal);
 

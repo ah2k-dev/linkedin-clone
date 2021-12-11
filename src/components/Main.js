@@ -9,7 +9,7 @@ const Main = (props) => {
   };
   const handleClose = () => {
     setshowModal(false);
-    console.log(showModal);
+    // console.log(showModal);
   };
   return (
     <Container>
