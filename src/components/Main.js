@@ -26,19 +26,19 @@ const Main = (props) => {
         </div>
         <div>
           <button>
-            <img src="/images/photo-icon1.png" />
+            <img src="/images/llphoto.png" />
             <span>Photo</span>
           </button>
           <button>
-            <img src="/images/video-icon.png" />
+            <img src="/images/lvideo.png" />
             <span>Video</span>
           </button>
           <button>
-            <img src="/images/event-icon1.png" />
+            <img src="/images/levent.png" />
             <span>Event</span>
           </button>
           <button>
-            <img src="/images/article-icon1.png" />
+            <img src="/images/larticle.png" />
             <span>Write Article</span>
           </button>
         </div>
@@ -81,8 +81,8 @@ const Main = (props) => {
                   <SocialCounts>
                     <li>
                       <button>
-                        <img src="/images/like1.png" />
-                        <img src="/images/comment.png" />
+                        <img src="/images/llike.png" />
+                        <img src="/images/lheart.png" />
                         <span>75</span>
                       </button>
                     </li>
@@ -92,19 +92,19 @@ const Main = (props) => {
                   </SocialCounts>
                   <SocialActions>
                     <button>
-                      <img src="/images/like1.png" />
+                      <img src="/images/lllke.png" />
                       <span>Like</span>
                     </button>
                     <button>
-                      <img src="/images/comment.png" />
+                      <img src="/images/lcomment.png" />
                       <span>Comment</span>
                     </button>
                     <button>
-                      <img src="/images/share.png" />
+                      <img src="/images/lshare.png" />
                       <span>Share</span>
                     </button>
                     <button>
-                      <img src="/images/send.png" />
+                      <img src="/images/lsend.png" />
                       <span>Send</span>
                     </button>
                   </SocialActions>
@@ -294,6 +294,7 @@ const SocialActions = styled.div`
   display: flex;
   justify-content: flex-start;
   margin: 0;
+  margin-bottom: 40px;;
   min-height: 40px;
   padding: 4px 8px;
   button {

@@ -56,7 +56,7 @@ function PostModal(props) {
             <Header>
               <h2>Create a post</h2>
               <button onClick={(e) => reset(e)}>
-                <img src="/images/close-icon.png" />
+                <img src="/images/lclose.png" />
               </button>
             </Header>
             <SharedContent>
@@ -108,15 +108,15 @@ function PostModal(props) {
             <SharedActions>
               <Attachassets>
                 <AssetButton onClick={() => switchArea("image")}>
-                  <img src="/images/share-img.png" />
+                  <img src="/images/lphoto.png" />
                 </AssetButton>
                 <AssetButton onClick={() => switchArea("media")}>
-                  <img src="/images/share-video.png" />
+                  <img src="/images/llvideo.png" />
                 </AssetButton>
               </Attachassets>
               <ShareComment>
                 <AssetButton>
-                  <img src="/images/share-comment" />
+                  <img src="/images/lcomments.png" />
                   Comment
                 </AssetButton>
               </ShareComment>
@@ -187,6 +187,10 @@ const Header = styled.div`
     min-width: auto;
     color: rgba(0, 0, 0, 0.15);
     cursor: pointer;
+    img{
+      width: 24px;
+
+    }
   }
 `;
 const SharedContent = styled.div`
@@ -227,6 +231,9 @@ const AssetButton = styled.button`
   height: 40px;
   min-width: auto;
   color: rgba(0, 0, 0, 0.5);
+  img{
+    width: 24px;
+  }
 `;
 const Attachassets = styled.div`
   align-items: center;
